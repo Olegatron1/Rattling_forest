@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Post;
 use Illuminate\Console\Command;
 
 class GoCommand extends Command
@@ -23,8 +24,26 @@ class GoCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
-        dd(213123);
+        $data = [
+            'title' => 'my 112',
+            'content' => '123',
+            'description' => '132',
+            'views' => 200,
+            'like' => 25,
+            'author_id' => 1,
+            'category_id' => 2,
+        ];
+
+//        $post = Post::find(2);
+//
+//        $post->delete();
+
+        Post::query()->update([
+            'views' => 123
+        ]);
+
+        dd(123123);
     }
 }
