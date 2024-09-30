@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Post;
+namespace App\Http\Controllers\Category;
 
 use App\Http\Controllers\Controller;
-use App\Models\Post;
+use App\Models\Category;
 
 class DeleteController extends Controller
 {
-    public function delete(Post $post)
+    public function delete(Category $category)
     {
-        $post->delete();
+        $category->delete();
         return response([
             'message' => 'post deleted successfully'
         ]);

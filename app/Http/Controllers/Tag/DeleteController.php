@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Post;
+namespace App\Http\Controllers\Tag;
 
 use App\Http\Controllers\Controller;
-use App\Models\Post;
+use App\Models\Tag;
 
 class DeleteController extends Controller
 {
-    public function delete(Post $post)
+    public function delete(Tag $tag)
     {
-        $post->delete();
+        $tag->delete();
         return response([
             'message' => 'post deleted successfully'
         ]);

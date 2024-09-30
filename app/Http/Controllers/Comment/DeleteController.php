@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Post;
+namespace App\Http\Controllers\Comment;
 
 use App\Http\Controllers\Controller;
-use App\Models\Post;
+use App\Models\Comment;
 
 class DeleteController extends Controller
 {
-    public function delete(Post $post)
+    public function delete(Comment $comment)
     {
-        $post->delete();
+        $comment->delete();
         return response([
             'message' => 'post deleted successfully'
         ]);

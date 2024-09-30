@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Post;
+namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
-use App\Models\Post;
+use App\Models\Profile;
 
 class DeleteController extends Controller
 {
-    public function delete(Post $post)
+    public function delete(Profile $profile)
     {
-        $post->delete();
+        $profile->delete();
         return response([
             'message' => 'post deleted successfully'
         ]);

@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Console\Command;
 
 class GoCommand extends Command
@@ -26,24 +27,25 @@ class GoCommand extends Command
      */
     public function handle(): void
     {
-        $data = [
-            'title' => 'my 112',
-            'content' => '123',
-            'description' => '132',
-            'views' => 200,
-            'like' => 25,
-            'author_id' => 1,
-            'category_id' => 2,
-        ];
+//        $data = [
+//            'email' => 'masha@mail.ru',
+//            'password' => '123123123',
+//        ];
 
 //        $post = Post::find(2);
 //
 //        $post->delete();
 
-        Post::query()->update([
-            'views' => 123
-        ]);
 
-        dd(123123);
+//        $user = User::create($data);
+
+
+//        $user = User::find(2)->update([
+//            'email' => 'prostitutkanika@mail.ru',
+//        ]);
+
+        $user = User::all();
+
+        dd($user);
     }
 }

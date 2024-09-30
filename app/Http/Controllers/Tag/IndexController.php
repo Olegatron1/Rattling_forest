@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Post;
+namespace App\Http\Controllers\Tag;
 
 use App\Http\Controllers\Controller;
-use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Collection;
 
 class IndexController extends Controller
 {
     public function index(): Collection
     {
-        return Post::all();
+        return Tag::all();
     }
 }
