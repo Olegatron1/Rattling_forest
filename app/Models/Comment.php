@@ -21,4 +21,9 @@ class Comment extends Model
 	{
 		return $this->belongsTo(Profile::class);
 	}
+
+	public function category()
+	{
+		return $this->post->category();
+	}
 }

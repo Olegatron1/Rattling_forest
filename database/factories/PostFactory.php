@@ -26,6 +26,7 @@ class PostFactory extends Factory
 			'status' => fake()->numberBetween(0, 3),
 			'profile_id' => Profile::inRandomOrder()->first()->id,
 			'category_id' => Category::inRandomOrder()->first()->id,
+			'published_at' => fake()->dateTimeBetween('-1 year')->format('Y-m-d H:i:s'),
         ];
     }
 }

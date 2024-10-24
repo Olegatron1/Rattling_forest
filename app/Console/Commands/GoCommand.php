@@ -2,7 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Post;
+use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Console\Command;
 
 class GoCommand extends Command
@@ -26,16 +30,11 @@ class GoCommand extends Command
      */
     public function handle(): void
     {
-		$post = Post::find(4);
-		// attach
-		// syncWithoutDetaching
-		// sync
-		// detach
-		// toggle
-		// updateExistingPivot
-
-		$post->tags()->updateExistingPivot(6, [
-			'status' => 5
-			]);
+		$comment = Comment::find(5);
+		$post = Post::find(2);
+		$profile = Profile::first();
+		$user = User::find(2);
+		$category = Category::first();
+		dd($profile->roles);
 	}
 }

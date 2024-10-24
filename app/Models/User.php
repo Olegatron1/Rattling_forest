@@ -4,8 +4,11 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -53,8 +56,29 @@ class User extends Authenticatable
 		return $this->hasMany(Profile::class);
 	}
 
-	public function roles()
+	public function roles(): BelongsToMany
 	{
 		return $this->belongsToMany(Role::class);
 	}
+
+	public function comments(): HasManyThrough
+	{
+		return $this->hasManyThrough(Comment::class, Profile::class);
+	}
+
+	public function comment(): HasOneThrough
+	{
+		return $this->hasOneThrough(Comment::class, Profile::class);
+	}
+
+	public function posts(): HasManyThrough
+	{
+		return $this->hasManyThrough(Post::class, Profile::class);
+	}
+
+	public function post()
+	{
+		return $this->profile->hasOne(Post::class);
+	}
+
 }
