@@ -25,7 +25,6 @@ class UpdateRequest extends FormRequest
             'content' => 'required|string',
             'description' => 'required|string',
             'views' => 'nullable|integer',
-            'like' => 'nullable|integer',
         ];
     }
 }
