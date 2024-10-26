@@ -13,13 +13,7 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->string('content');
-			$table->foreignId('profile_id')->index()->constrained('profiles');
-			$table->foreignId('parent_id')->index()->nullable()->constrained('comments');
 			$table->timestamps();
-
-			$table->morphs('commentable');
-			//$table->foreignId('post_id')->index()->constrained('posts');
 		});
     }
 

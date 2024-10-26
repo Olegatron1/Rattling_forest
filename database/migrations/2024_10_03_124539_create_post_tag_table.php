@@ -13,9 +13,6 @@ return new class extends Migration
     {
         Schema::create('post_tag', function (Blueprint $table) {
             $table->id();
-			$table->foreignId('post_id')->index()->constrained('posts');
-			$table->foreignId('tag_id')->index()->constrained('tags');
-			$table->unsignedSmallInteger('status')->default(1);
             $table->timestamps();
         });
     }

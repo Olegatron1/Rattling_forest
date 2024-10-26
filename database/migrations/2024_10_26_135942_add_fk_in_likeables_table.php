@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('likeables', function (Blueprint $table) {
+			$table->foreignId('profile_id')->constrained('profiles');
         });
     }
 
@@ -22,6 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        Schema::table('likeables', function (Blueprint $table) {
+            $table->dropForeign(['profile_id']);
+            $table->dropColumn('profile_id');
+        });
     }
 };
