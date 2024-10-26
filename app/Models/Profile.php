@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Profile extends Model
 {
@@ -24,9 +25,9 @@ class Profile extends Model
 		return $this->hasMany(Comment::class);
 	}
 
-	public function posts(): BelongsToMany
+	public function likedPosts(): MorphToMany
 	{
-		return $this->belongsToMany(Post::class);
+		return $this->morphedByMany(Post::class, 'likeable');
 	}
 
 	public function likes(): BelongsToMany

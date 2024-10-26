@@ -26,4 +26,10 @@ class Comment extends Model
 	{
 		return $this->post->category();
 	}
+
+	public function commentable()
+	{
+		return $this->morphTo();
+	}
+
 }

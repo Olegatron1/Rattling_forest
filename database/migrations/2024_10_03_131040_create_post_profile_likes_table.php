@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('post_profile_likes', function (Blueprint $table) {
+        Schema::create('likeables', function (Blueprint $table) {
             $table->id();
-			$table->foreignId('post_id')->index()->constrained('posts');
 			$table->foreignId('profile_id')->index()->constrained('profiles');
-            $table->timestamps();
+			$table->morphs('likeable');
+			$table->timestamps();
         });
     }
 
