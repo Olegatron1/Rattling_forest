@@ -8,12 +8,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
     use HasFactory;
+	use SoftDeletes;
 
-    protected $guarded = false;
+
+	protected $guarded = false;
 
 	public function posts(): HasMany
 	{

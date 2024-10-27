@@ -30,22 +30,10 @@ class GoCommand extends Command
      */
     public function handle(): void
     {
-
-//		$profile = Profile::first();
-//		$profile->likedPosts()->attach(1);
+		$post = Post::find(1);
+		$post->forceDelete();
 
 		$post = Post::find(1);
-		dd($post->likedByProfiles);
-//		$comment = Comment::first();
-//		dd($comment->commentable);
-//		$post = Post::factory()->create();
-//		dd($post->comments()->create([
-//			'profile_id' => 1,
-//			'content' => '111111111',
-//		]));
-
-//		$profile = Profile::first();
-//		$user = User::find(2);
-//		$category = Category::first();
+		dd($post);
 	}
 }
