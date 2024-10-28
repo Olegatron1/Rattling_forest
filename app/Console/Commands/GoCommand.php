@@ -2,10 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Category;
-use App\Models\Comment;
-use App\Models\Post;
-use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Console\Command;
 
@@ -30,10 +26,6 @@ class GoCommand extends Command
      */
     public function handle(): void
     {
-		$post = Post::find(1);
-		$post->forceDelete();
-
-		$post = Post::find(1);
-		dd($post);
+		User::factory()->create();
 	}
 }

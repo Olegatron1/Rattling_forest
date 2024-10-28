@@ -6,7 +6,8 @@ use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\TagController;
 use App\Http\Controllers\Api\RoleController;
-use Illuminate\Http\Request;
+	use App\Http\Controllers\Api\UserController;
+	use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/user', function (Request $request) {
@@ -24,3 +25,5 @@ Route::apiResource('profiles', ProfileController::class);
 Route::apiResource('tags', TagController::class);
 
 Route::apiResource('roles', RoleController::class);
+
+Route::apiResource('users', UserController::class);
