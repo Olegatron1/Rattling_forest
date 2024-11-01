@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Profile\IndexRequest;
 use App\Http\Requests\Api\Profile\StoreRequest;
 use App\Http\Requests\Api\Profile\UpdateRequest;
 use App\Http\Resources\Profile\ProfileResource;
@@ -15,9 +16,14 @@ class ProfileController extends Controller
 
 	}
 
-	public function index()
+	public function index(IndexRequest $request): array
 	{
-		return ProfileResource::collection(Profile::all());
+
+		$data = $request->validated();
+
+		$posts = Profile::filter($data)->get();
+
+		return ProfileResource::collection($posts)->resolve();
 	}
 
 	public function show(Profile $profile)

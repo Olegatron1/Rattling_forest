@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Http\Filters\PostFilter;
+use App\Models\Traits\HasFilter;
 use App\Observers\PostObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -17,6 +20,7 @@ class Post extends Model
 {
     use HasFactory;
 	use SoftDeletes;
+	use HasFilter;
 
     protected $guarded = false;
 
@@ -33,6 +37,11 @@ class Post extends Model
 	public function profiles(): BelongsToMany
 	{
 		return $this->belongsToMany(Profile::class);
+	}
+
+	public function profile(): BelongsTo
+	{
+		return $this->belongsTo(Profile::class);
 	}
 
 	public function likes(): BelongsToMany

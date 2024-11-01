@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasFilter;
 use App\Models\Traits\HasLog;
 use App\Observers\ProfileObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
@@ -19,6 +20,7 @@ class Profile extends Model
     use HasFactory;
 	use SoftDeletes;
 	use HasLog;
+	use HasFilter;
 
     protected $guarded = false;
 

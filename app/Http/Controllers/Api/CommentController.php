@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Comment\IndexRequest;
 use App\Http\Requests\Api\Comment\StoreRequest;
 use App\Http\Requests\Api\Comment\UpdateRequest;
 use App\Http\Resources\Comment\CommentResource;
@@ -15,9 +16,14 @@ class CommentController extends Controller
 
 	}
 
-	public function index()
+	public function index(IndexRequest $request): array
 	{
-		return CommentResource::collection(Comment::all());
+
+		$data = $request->validated();
+
+		$comments = Comment::filter($data)->get();
+
+		return CommentResource::collection($comments)->resolve();
 	}
 
 	public function show(Comment $comment)
