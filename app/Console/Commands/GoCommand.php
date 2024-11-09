@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Hash;
 
 class GoCommand extends Command
 {
@@ -26,6 +27,12 @@ class GoCommand extends Command
      */
     public function handle(): void
     {
-		User::factory()->create();
+		User::create(
+            [
+                'name' => 'John Doe',
+                'email' => 'user1@user.com',
+                'password' => Hash::make('123123123'),
+            ]
+        );
 	}
 }

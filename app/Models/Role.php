@@ -12,8 +12,19 @@ class Role extends Model
     use HasFactory;
 	use SoftDeletes;
 
+    const ADMIN = 1;
+    const EDITOR = 2;
+
 
 	protected $guarded = false;
+
+    public static function getRoles(): array
+    {
+        return [
+            self::ADMIN => 'admin',
+            self::EDITOR => 'editor',
+        ];
+    }
 
 	public function users(): BelongsToMany
 	{

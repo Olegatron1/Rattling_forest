@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Traits\HasLog;
 use App\Observers\UserObserver;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -15,17 +16,17 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 #[ObservedBy(UserObserver::class)]
-
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
-	use SoftDeletes;
-	use HasLog;
+    use SoftDeletes;
+    use HasLog;
 
 
-	/**
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -55,39 +56,58 @@ class User extends Authenticatable
         ];
     }
 
-	public function profile(): HasOne
-	{
-		return $this->hasOne(Profile::class);
-	}
+    public function profile(): HasOne
+    {
+        return $this->hasOne(Profile::class);
+    }
 
-	public function profiles(): HasMany
-	{
-		return $this->hasMany(Profile::class);
-	}
+    public function profiles(): HasMany
+    {
+        return $this->hasMany(Profile::class);
+    }
 
-	public function roles(): BelongsToMany
-	{
-		return $this->belongsToMany(Role::class);
-	}
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class);
+    }
 
-	public function comments(): HasManyThrough
-	{
-		return $this->hasManyThrough(Comment::class, Profile::class);
-	}
+    public function comments(): HasManyThrough
+    {
+        return $this->hasManyThrough(Comment::class, Profile::class);
+    }
 
-	public function comment(): HasOneThrough
-	{
-		return $this->hasOneThrough(Comment::class, Profile::class);
-	}
+    public function comment(): HasOneThrough
+    {
+        return $this->hasOneThrough(Comment::class, Profile::class);
+    }
 
-	public function posts(): HasManyThrough
-	{
-		return $this->hasManyThrough(Post::class, Profile::class);
-	}
+    public function posts(): HasManyThrough
+    {
+        return $this->hasManyThrough(Post::class, Profile::class);
+    }
 
-	public function post()
-	{
-		return $this->profile->hasOne(Post::class);
-	}
+    public function post()
+    {
+        return $this->profile->hasOne(Post::class);
+    }
 
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims(): array
+    {
+        return [];
+    }
+
+    public function getIsAdminAttribute():bool
+    {
+        return auth()->user()->roles->contains('role_idx', Role::ADMIN);
+    }
+
+    public function getIsEditorAttribute():bool
+    {
+        return auth()->user()->roles->contains('role_idx', Role::EDITOR);
+    }
 }

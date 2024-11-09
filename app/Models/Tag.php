@@ -12,14 +12,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Tag extends Model
 {
     use HasFactory;
-	use SoftDeletes;
-	use HasLog;
-	use HasFilter;
+    use SoftDeletes;
+    use HasLog;
+    use HasFilter;
 
-	protected $guarded = false;
+    protected $guarded = false;
 
-	public function posts(): BelongsToMany
-	{
-		return $this->belongsToMany(Post::class);
-	}
+    public function posts(): BelongsToMany
+    {
+        return $this->belongsToMany(Post::class);
+    }
 }
