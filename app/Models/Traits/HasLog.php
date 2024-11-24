@@ -16,6 +16,10 @@ trait HasLog
 				'old_value' => null,
 				'dirty' => json_encode($model->getAttributes()),
 			]);
+
+            \Illuminate\Support\Facades\Log::channel('business')->info(
+                "Model created: " . $model::class . " with ID: " . $model->id
+            );
 		});
 
 		static::updated(function (Model $model) {
@@ -25,6 +29,10 @@ trait HasLog
 				'old_value' => json_encode($model->getOriginal()),
 				'dirty' => json_encode($model->getDirty()),
 			]);
+
+            \Illuminate\Support\Facades\Log::channel('business')->info(
+                "Model updated: " . $model::class . " with ID: " . $model->id
+            );
 		});
 
 		static::deleted(function (Model $model) {
@@ -34,6 +42,10 @@ trait HasLog
 				'old_value' => json_encode($model->getAttributes()),
 				'dirty' => null,
 			]);
+
+            \Illuminate\Support\Facades\Log::channel('business')->info(
+                "Model deleted: " . $model::class . " with ID: " . $model->id
+            );
 		});
 
 		static::retrieved(function (Model $model) {
@@ -43,6 +55,10 @@ trait HasLog
 				'old_value' => json_encode($model->getAttributes()),
 				'dirty' => null,
 			]);
+
+            \Illuminate\Support\Facades\Log::channel('business')->info(
+                "Model retrieved: " . $model::class . " with ID: " . $model->id
+            );
 		});
     }
 }

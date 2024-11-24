@@ -2,9 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\Models\User;
+use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class GoCommand extends Command
 {
@@ -13,7 +14,7 @@ class GoCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'app:go-command';
+    protected $signature = 'go';
 
     /**
      * The console command description.
@@ -27,12 +28,8 @@ class GoCommand extends Command
      */
     public function handle(): void
     {
-		User::create(
-            [
-                'name' => 'John Doe',
-                'email' => 'user1@user.com',
-                'password' => Hash::make('123123123'),
-            ]
-        );
-	}
+		$tag = Tag::find(1);
+
+        $tag->delete();
+    }
 }

@@ -22,8 +22,8 @@ class UserSeeder extends Seeder
         ]);
 
         $role = Role::firstOrCreate([
-            'title' => Role::getRoles()[Role::EDITOR],
-            'role_idx' => Role::EDITOR,
+            'title' => Role::getRoles()[Role::ADMIN],
+            'role_idx' => Role::ADMIN,
         ]);
 
         $users->roles()->sync($role->id);

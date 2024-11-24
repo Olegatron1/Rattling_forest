@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exceptions\PostException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Post\IndexRequest;
 use App\Http\Requests\Api\Post\StoreRequest;
@@ -44,7 +45,12 @@ class PostController extends Controller
 
 	public function store(StoreRequest $request)
 	{
-		$data = $request->validated();
+        $data = $request->validated();
+
+        $post = Post::firstOrCreate(
+            ['title' => $data['title']], $data);
+
+        $data = $request->validated();
 
 		return Post::create($data);
 	}
